@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.believe.humanResource.po">
+
+	<class name="PositionTitle" table = "humanResource_positionTitle" >
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		
+		<property name="name"  length="20"/>
+		<property name="description"  length="100"/>
+		
+		<many-to-one name="position" column="position_id" class="Position">
+		</many-to-one>
+		
+			
+	</class>
+	
+</hibernate-mapping>

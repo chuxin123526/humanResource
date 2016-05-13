@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.believe.humanResource.po">
+
+	<class name="SalaryStandard" table = "humanResource_SalaryStandard">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="name"  length="20"/>
+		<property name="addTime" type="timestamp" />
+		<property name="status"  length="6"/>
+		<property name="approveIdea" />
+		<property name="money" />
+		<property name="maker"  length="20"/>
+		
+		<many-to-one name="user" class="User" column="user_id"></many-to-one>
+		
+		<set name="salaryProjects" table="salaryStandard_salaryProject">
+		<key column="salaryStandard_id"></key>
+		<many-to-many class="SalaryProject" column="salaryProject_id"></many-to-many>
+		</set>
+		
+		<set name="humanResources" cascade="delete">
+		<key column="salaryStandard_id"></key>
+		<one-to-many class="HumanResource"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>

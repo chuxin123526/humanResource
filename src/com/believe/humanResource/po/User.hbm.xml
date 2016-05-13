@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.believe.humanResource.po">
+
+	<class name="User" table= "humanResource_User">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="name"  length="20"/>
+		<property name="password"  length="32"/>
+		
+		<set name="roles" table = "user_role" lazy = "false">
+		<key column="user_id"></key>
+		<many-to-many class = "Role" column="role_id"></many-to-many>
+		</set>
+		
+		<set name="salaryStandards" cascade="delete">
+		<key column="user_id"></key>
+		<one-to-many class="SalaryStandard" />
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>

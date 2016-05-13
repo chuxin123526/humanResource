@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.believe.humanResource.po">
+
+	<class name="HumanResource" table = "humanResource_humanresource" >
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="number" length="20" />
+		<property name="name"  length="20"/>
+		<property name="sex"  length="2"/>
+		<property name="email"  length="20" />
+		<property name="qq"  length="20"/>
+		<property name="phoneNumber"  length="11"/>
+		<property name="mobilePhoneNumber"  length="11"/>
+		<property name="address"  length="200"/>
+		<property name="country"  length="20"/>
+		<property name="birthAddress"  length="200"/>
+		<property name="birthDate" type = "timestamp" />
+		<property name="religion"  length="20"/>
+		<property name="political"  length="20"/>
+		<property name="identityCard"  length="18"/>
+		<property name="age" />
+		<property name="education"  length="6"/>
+		<property name="major"  length="20"/>
+		<property name="nation"  length="20"/>
+		<property name="bank"  length="20"/>
+		<property name="account"  length="20"/>
+		<property name="speciality"  length="50"/>
+		<property name="interest"  length="50"/>
+		<property name="resume" />
+		<property name="familyRelationship" />
+		<property name="remark"/>
+		<property name="imageURL"  length="100"/>
+		<property name="addTime" type = "timestamp" />
+		<property name="status"  length="6"/>
+		<property name="approveIdea" />
+		<property name="postCode" length="6" />
+		
+		
+		<many-to-one name="salaryStandard" column="salaryStandard_id" class="SalaryStandard">
+		</many-to-one>
+		
+		<many-to-one name="organazation1" column="organazation1_id" class="Organazation">
+		</many-to-one>
+		
+		<many-to-one name="organazation2" column="organazation2_id" class="Organazation">
+		</many-to-one>
+		
+		<many-to-one name="organazation3" column="organazation3_id" class="Organazation">
+		</many-to-one>
+		
+		<many-to-one name="positionType" column="positionType_id" class="PositionType">
+		</many-to-one>
+	
+		<many-to-one name="position" column="position_id" class="Position">
+		</many-to-one>
+		
+		<many-to-one name="positionTitle" column="positionTitle_id" class="PositionTitle">
+		</many-to-one>
+		
+		<many-to-one name="user" column="user_id" class="User">
+		</many-to-one>
+		
+		<set name="salaryPersonals" cascade="delete">
+		<key column="humanResource_id"></key>
+		<one-to-many class="SalaryPersonal"/>
+		</set>
+		
+	</class>
+	
+</hibernate-mapping>

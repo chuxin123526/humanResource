@@ -1,0 +1,32 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+<session-factory>
+
+	<!-- 数据库信息（连接信息写到spring的配置文件中） -->
+	<property name="dialect">
+		org.hibernate.dialect.MySQL5Dialect
+	</property>
+
+
+	<!-- 其他配置 -->
+	<property name="show_sql">true</property>
+	<property name="hbm2ddl.auto">update</property>
+
+	<!-- 导入映射文件 -->
+	<mapping resource="com/believe/humanResource/po/User.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/HumanResource.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/Organazation.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/Position.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/PositionType.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/Privilege.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/Role.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/SalaryProject.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/SalaryStandard.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/Salary.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/PositionTitle.hbm.xml" />
+	<mapping resource="com/believe/humanResource/po/SalaryPersonal.hbm.xml" />
+</session-factory>
+</hibernate-configuration>

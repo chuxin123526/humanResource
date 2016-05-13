@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 配置为开发模式 -->
+    <constant name="struts.devMode" value="true" />
+	<!-- 配置扩展名为action -->
+    <constant name="struts.action.extension" value="action" />
+	
+	
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	
+	
+
+    <package name="default" namespace="/" extends="struts-default">
+   
+   <!-- 自定义拦截器  -->
+    <interceptors>
+
+			<interceptor name="loginInterceptor" class="com.believe.humanResource.intercepter.LoginInterceptor"></interceptor>
+			<interceptor name="privilegeInterceptor" class="com.believe.humanResource.intercepter.PrivilegeInterceptor"></interceptor>
+			
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="privilegeInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 全局跳转配置 -->
+		<global-results>
+		<result name = "loginUI" type="redirect">/loginUI.jsp</result>
+		<result name = "home" type="redirectAction">homeAction_home</result>
+		<result name = "input">/error.jsp</result> 
+		</global-results>
+		
+		<!-- 测试用的action，当与Spring整合后，class属性写的就是Spring中bean的名称 -->
+		<action name="testAction" class="testAction">
+			<result name="success">/test.jsp</result>
+		</action>
+		
+		<!-- 测试用的action，当与Spring整合后，class属性写的就是Spring中bean的名称 -->
+		<action name="testAction1"  class="testAction1">
+			<result name="success">/test1.jsp</result>
+		</action>
+	
+	<!-- 首页配置 -->
+		<action name="homeAction_*" class="homeAction" method = "{1}">
+			<result name = "home">/WEB-INF/jsp/Home/home.jsp</result>
+		</action>
+		
+		<!-- 用户管理配置 -->
+		<action name="userAction_*" class="userAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/User/user_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/User/user_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/User/user_updateUI.jsp</result>
+			<result name = "updatePasswordUI">/WEB-INF/jsp/User/user_updatePasswordUI.jsp</result>
+			<result name = "distributeRoleUI">/WEB-INF/jsp/User/user_distributeRoleUI.jsp</result>
+			<result name = "toList" type="redirectAction">userAction_list</result>
+			
+		</action>
+
+		<!-- 角色管理配置 -->
+		<action name="roleAction_*" class="roleAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/Role/role_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/Role/role_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/Role/role_updateUI.jsp</result>
+			<result name = "distributePrivilegeUI">/WEB-INF/jsp/Role/role_distributePrivilegeUI.jsp</result>
+			<result name = "toList" type="redirectAction">roleAction_list</result>
+		</action>
+		
+		<!-- 机构管理配置 -->
+		<action name="organazationAction_*" class="organazationAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/Organazation/organazation_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/Organazation/organazation_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/Organazation/organazation_updateUI.jsp</result>
+			<result name = "toList" type="redirectAction">organazationAction_list</result>
+		</action>
+		
+		<!-- 职位类型管理配置 -->
+		<action name="positionTypeAction_*" class="positionTypeAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/PositionType/positionType_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/PositionType/positionType_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/PositionType/positionType_updateUI.jsp</result>
+			<result name = "toList" type="redirectAction">positionTypeAction_list</result>
+		</action>
+		
+		<!-- 职位管理配置 -->
+		<action name="positionAction_*" class="positionAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/Position/position_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/Position/position_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/Position/position_updateUI.jsp</result>
+			<result name = "toList" type="redirectAction">positionAction_list</result>
+		</action>
+		
+		<!-- 职称管理配置 -->
+		<action name="positionTitleAction_*" class="positionTitleAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/PositionTitle/positionTitle_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/PositionTitle/positionTitle_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/PositionTitle/positionTitle_updateUI.jsp</result>
+			<result name = "toList" type="redirectAction">positionTitleAction_list</result>
+		</action>
+		
+		<!-- 薪酬项目管理配置 -->
+		<action name="salaryProjectAction_*" class="salaryProjectAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/SalaryProject/salaryProject_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/SalaryProject/salaryProject_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/SalaryProject/salaryProject_updateUI.jsp</result>
+			<result name = "toList" type="redirectAction">salaryProjectAction_list</result>
+		</action>
+		
+		<!--薪酬标准管理配置 -->
+		<action name="salaryStandardAction_*" class="salaryStandardAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/SalaryStandard/salaryStandard_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/SalaryStandard/salaryStandard_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/SalaryStandard/salaryStandard_updateUI.jsp</result>
+			<result name = "detailUI">/WEB-INF/jsp/SalaryStandard/salaryStandard_detailUI.jsp</result>
+			<result name = "toList" type="redirectAction">salaryStandardAction_list</result>
+		</action>
+		
+		<!--薪酬标准审核管理配置 -->
+		<action name="salaryStandardApproveAction_*" class="salaryStandardApproveAction" method = "{1}">
+			<result name = "unApproveList">/WEB-INF/jsp/SalaryStandardApprove/salaryStandardApprove_unApproveList.jsp</result>
+			<result name = "approveUI">/WEB-INF/jsp/SalaryStandardApprove/salaryStandardApprove_approveUI.jsp</result>
+			<result name = "toUnApproveList" type="redirectAction">salaryStandardApproveAction_list</result>
+		</action>
+		
+		<!--人力资源管理配置 -->
+		<action name="humanResourceAction_*" class="humanResourceAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/HumanResource/humanResource_list.jsp</result>
+			<result name = "addUI">/WEB-INF/jsp/HumanResource/humanResource_addUI.jsp</result>
+			<result name = "updateUI">/WEB-INF/jsp/HumanResource/humanResource_updateUI.jsp</result>
+			<result name = "detailUI">/WEB-INF/jsp/HumanResource/humanResource_detailUI.jsp</result>
+			<result name = "takeChildOrganazationList">/WEB-INF/jsp/HumanResource/humanResource_takeChildOrganazationList.jsp</result>
+			<result name = "takePositionList">/WEB-INF/jsp/HumanResource/humanResource_takePositionList.jsp</result>
+			<result name = "takePositionTitleList">/WEB-INF/jsp/HumanResource/humanResource_takePositionTitleList.jsp</result>
+			<result name = "toList" type="redirectAction">humanResourceAction_list</result>
+		</action>
+		
+		<!-- 人力资源审核配置 -->
+		<action name="humanResourceApproveAction_*" class="humanResourceApproveAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/HumanResourceApprove/humanResourceApprove_list.jsp</result>
+			<result name = "approveUI">/WEB-INF/jsp/HumanResourceApprove/humanResourceApprove_approveUI.jsp</result>
+			<result name = "toList" type="redirectAction">humanResourceApproveAction_list</result>
+		</action>
+		
+		<!-- 薪酬发放管理配置 -->
+		<action name="salaryAction_*" class="salaryAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/Salary/salary_list.jsp</result>
+			<result name = "registerUI">/WEB-INF/jsp/Salary/salary_registerUI.jsp</result>
+			<result name = "updatePersonalSalaryUI">/WEB-INF/jsp/Salary/salary_updatePersonalSalaryUI.jsp</result>
+			<result name = "toList" type="redirectAction">salaryAction_list</result>
+			<result name = "toRegisterUI" type="redirectAction">salaryAction_registerUI?salary.id=${salary.id}</result>
+		</action>
+		
+		<!-- 薪酬发放审核管理配置 -->
+		<action name="salaryApproveAction_*" class="salaryApproveAction" method = "{1}">
+			<result name = "list">/WEB-INF/jsp/SalaryApprove/salaryApprove_list.jsp</result>
+			<result name = "approveUI">/WEB-INF/jsp/SalaryApprove/salaryApprove_approveUI.jsp</result>
+			<result name = "updatePersonalSalaryUI">/WEB-INF/jsp/SalaryApprove/salaryApprove_updatePersonalSalaryUI.jsp</result>
+			<result name = "toList" type="redirectAction">salaryApproveAction_list</result>
+			<result name = "toApproveUI" type="redirectAction">salaryApproveAction_approveUI?salary.id=${salary.id}</result>
+		</action>
+
+    </package>
+
+</struts>

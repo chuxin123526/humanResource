@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.believe.humanResource.po">
+
+	<class name="Organazation" table = "humanResource_Organazation">
+		<id name="id">
+            <generator class="native"/>
+		</id>
+		<property name="name"  length="20"/>
+		<property name="description"  length="100"/>
+		
+		<many-to-one name="organazation" class="Organazation" column="organazation_id"></many-to-one>
+		
+		<set name="organazations" cascade="delete">
+		<key column="organazation_id"></key>
+		<one-to-many class="Organazation" />
+		</set>
+		
+		<set name="salarys">
+		<key column="organazation_id"></key>
+		<one-to-many class="Salary"/>
+		</set>
+		
+		<set name="humanResources" cascade="delete">
+		<key column="organazation3_id"></key>
+		<one-to-many class="HumanResource"/>
+		</set>
+		
+		
+	</class>
+	
+</hibernate-mapping>
